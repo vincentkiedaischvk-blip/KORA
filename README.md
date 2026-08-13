@@ -86,6 +86,17 @@ das falsche Werkzeug.
 
 Ausführlich in [docs/MATCHING.md](docs/MATCHING.md).
 
+### Direkteinstieg für Vorführung
+
+Damit ein Screenshot oder ein Video nicht beim leeren Formular anfangen muss:
+
+| Aufruf | Zeigt |
+|---|---|
+| `app/?schritt=2` | Anfrage abgeschickt, Zuordnung sichtbar |
+| `app/?schritt=2&gruende=1` | dazu die Ausschlussliste aufgeklappt |
+| `app/?ansicht=anbieter` | direkt die Anbieteransicht |
+| `app/?ort=Hamburg&anzahl=12&anlass=Objektschutz` | Formularwerte überschreiben |
+
 ---
 
 ## Inhalt

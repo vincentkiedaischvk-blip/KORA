@@ -592,6 +592,38 @@ function render(){
   document.getElementById('app').innerHTML = S.view==='kunde' ? viewKunde() : viewAnbieter();
 }
 render();
+
+/* Direkteinstieg für Vorführung und Aufnahme. Ohne das beginnt jeder Durchlauf
+   beim leeren Formular — für einen Screenshot der Zuordnung oder ein Video, das
+   mitten im Ablauf einsetzt, ist das der falsche Startpunkt.
+
+     ?schritt=2   Anfrage abgeschickt, Zuordnung sichtbar
+     ?schritt=2&gruende=1   dazu die Ausschlussliste aufgeklappt
+     ?ansicht=anbieter      direkt in die Anbieteransicht
+
+   Die Werte des Formulars lassen sich überschreiben:
+     ?ort=Hamburg&anzahl=12&anlass=Objektschutz
+*/
+(function deepLink(){
+  const q = new URLSearchParams(location.search);
+  if(![...q.keys()].length) return;
+
+  const setzen = (id, wert) => {
+    const el = document.getElementById(id);
+    if(el && wert) el.value = wert;
+  };
+  setzen('f_ort', q.get('ort'));
+  setzen('f_anlass', q.get('anlass'));
+  setzen('f_anzahl', q.get('anzahl'));
+  setzen('f_anf', q.get('anf'));
+
+  if(q.get('schritt') === '2' || q.get('schritt') === '3'){
+    sendRequest();
+    if(q.get('gruende')) S.showRejects = true;
+  }
+  if(q.get('ansicht') === 'anbieter') S.view = 'anbieter';
+  render();
+})();
 </script>
 </body>
 </html>
