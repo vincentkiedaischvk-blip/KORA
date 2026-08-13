@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="KORA">
+  <rect width="64" height="64" rx="14" fill="#0D1219"/>
+  <g transform="translate(8,8)">
+    <rect x="9" y="8" width="6" height="32" fill="#EDEBE5"/>
+    <path d="M14 24 L37 10" stroke="#EDEBE5" stroke-width="6" fill="none"/>
+    <path d="M14 24 L37 38" stroke="#EDEBE5" stroke-width="6" fill="none"/>
+    <path d="M14 24 L41 24" stroke="#F2C14E" stroke-width="6" fill="none"/>
+  </g>
+</svg>

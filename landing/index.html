@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KORA — Verified security. On demand.</title>
+<meta name="description" content="KORA verbindet Unternehmen mit geprüften Security-Dienstleistern. Anfrage stellen, passende Anbieter erhalten, Angebote vergleichen.">
+<style>
+/* Lokal gehostet - keine Verbindung zu Google, siehe legal/datenschutz.html */
+@font-face{font-family:Inter;src:url(fonts/Inter-Regular.ttf) format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:Inter;src:url(fonts/Inter-Medium.ttf) format('truetype');font-weight:500;font-display:swap}
+@font-face{font-family:Inter;src:url(fonts/Inter-SemiBold.ttf) format('truetype');font-weight:600;font-display:swap}
+@font-face{font-family:Inter;src:url(fonts/InterDisplay-Bold.ttf) format('truetype');font-weight:700;font-display:swap}
+@font-face{font-family:Inter;src:url(fonts/InterDisplay-ExtraBold.ttf) format('truetype');font-weight:800;font-display:swap}
+@font-face{font-family:Inter;src:url(fonts/InterDisplay-Black.ttf) format('truetype');font-weight:900;font-display:swap}
+</style>
+<style>
+:root{
+  --bg:#F4F4F2; --card:#FFF; --ink:#0A0A0A; --grey:#8A8A8A; --grey2:#6E6E6E;
+  --lime:#C8F169; --line:#E4E4E0; --sh:0 1px 2px rgba(0,0,0,.04),0 10px 30px rgba(0,0,0,.06);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1160px;margin:0 auto;padding:0 28px}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:6px}
+
+header{padding:26px 0;display:flex;align-items:center;justify-content:space-between}
+.logo{font-weight:800;font-size:21px;letter-spacing:.02em}
+.logo span{color:var(--grey)}
+.nav-cta{background:#fff;border:1px solid var(--line);padding:12px 24px;border-radius:999px;font-weight:700;font-size:14.5px;text-decoration:none;box-shadow:var(--sh)}
+
+.pill{display:inline-flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--line);padding:9px 18px;border-radius:999px;font-size:11.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;box-shadow:var(--sh)}
+.pill .dot{width:8px;height:8px;border-radius:999px;background:var(--lime)}
+
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:60px 0 110px}
+h1{font-size:clamp(46px,7vw,88px);font-weight:900;letter-spacing:-.04em;line-height:.98;margin:26px 0 22px}
+h1 em{font-style:normal;color:var(--grey)}
+.lede{font-size:19px;color:var(--grey2);max-width:46ch}
+form{display:flex;gap:10px;margin-top:34px;flex-wrap:wrap}
+input{flex:1;min-width:230px;padding:17px 20px;border:1.5px solid var(--line);border-radius:14px;font-size:16px;font-family:inherit;background:#fff}
+input:focus{outline:none;border-color:var(--ink)}
+button{background:var(--ink);color:#fff;border:none;padding:17px 30px;border-radius:14px;font-weight:700;font-size:16px;font-family:inherit;cursor:pointer}
+.fine{margin-top:14px;font-size:13.5px;color:var(--grey)}
+.ok{display:none;margin-top:18px;padding:16px 20px;background:var(--lime);border-radius:14px;font-weight:700}
+
+/* Produktmockup */
+.mock{background:var(--ink);border-radius:28px;padding:14px}
+.mock .win{background:var(--card);border-radius:18px;padding:24px}
+.mock .dots{display:flex;gap:6px;margin-bottom:20px}
+.mock .dots i{width:9px;height:9px;border-radius:999px;background:#DDD}
+.mock .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.mock .top b{font-size:19px;font-weight:800}
+.tag{background:var(--lime);padding:6px 13px;border-radius:999px;font-size:10.5px;font-weight:800;letter-spacing:.1em}
+.job{background:var(--bg);border-radius:14px;padding:18px 20px;margin-bottom:12px}
+.job b{font-size:17px;font-weight:800;display:block}
+.job small{color:var(--grey2);font-size:13.5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.bid{background:var(--bg);border-radius:14px;padding:18px 20px}
+.bid b{font-size:16px;font-weight:800;display:block}
+.bid .v{font-size:12.5px;color:var(--grey2);margin:6px 0 12px}
+.bid .p{font-size:21px;font-weight:900;letter-spacing:-.02em}
+
+section{padding:100px 0;border-top:1px solid var(--line)}
+h2{font-size:clamp(32px,4.4vw,50px);font-weight:900;letter-spacing:-.03em;line-height:1.04;margin-bottom:18px}
+h2 em{font-style:normal;color:var(--grey)}
+.intro{font-size:18px;color:var(--grey2);max-width:56ch;margin-bottom:52px}
+.eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--grey);margin-bottom:16px}
+
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.step{background:var(--card);border-radius:22px;padding:32px;box-shadow:var(--sh)}
+.step .n{font-size:11.5px;font-weight:700;letter-spacing:.14em;color:var(--grey);margin-bottom:22px}
+.step h3{font-size:24px;font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
+.step p{color:var(--grey2);font-size:15.5px}
+
+.chips{display:flex;flex-wrap:wrap;gap:11px}
+.chip{background:var(--card);border-radius:999px;padding:15px 24px;font-weight:700;font-size:16px;box-shadow:var(--sh);display:flex;align-items:center;gap:10px}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.list{display:grid;gap:26px;margin:38px 0}
+.item{display:flex;gap:18px}
+.item .n{font-weight:800;font-size:14px;color:var(--grey);padding-top:3px;min-width:24px}
+.item b{font-size:19px;font-weight:800;display:block;margin-bottom:5px}
+.item p{color:var(--grey2);font-size:15.5px}
+.link{font-weight:700;text-decoration:none;border-bottom:2px solid var(--lime);padding-bottom:2px}
+
+.week{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:16px 0}
+.week i{font-style:normal;text-align:center;font-size:11px;font-weight:700;color:var(--grey);padding:7px 0;background:var(--bg);border-radius:8px}
+.shift{display:flex;justify-content:space-between;align-items:center;background:var(--bg);border-radius:12px;padding:13px 16px;margin-bottom:8px;font-size:14.5px}
+.shift b{font-weight:800}
+
+.final{text-align:center;padding:110px 0}
+.final form{justify-content:center;max-width:560px;margin:34px auto 0}
+.final .fine{text-align:center}
+
+footer{padding:40px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:13.5px;color:var(--grey);flex-wrap:wrap;gap:14px}
+footer a{text-decoration:none}
+footer a:hover{color:var(--ink)}
+.ig{display:inline-flex;align-items:center;gap:6px;text-decoration:none}
+.ig:hover{color:var(--ink)}
+
+
+@media(max-width:900px){
+  .hero,.split{grid-template-columns:1fr;gap:44px;padding-top:34px}
+  .steps{grid-template-columns:1fr}
+  section{padding:70px 0}
+}
+
+/* v3: Rollenwahl und Einwilligung */
+.roles{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}
+.role{flex:1;min-width:170px;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:16px 18px;cursor:pointer;text-align:left;font-family:inherit;transition:.16s}
+.role:hover{border-color:#C9C9C4}
+.role.on{border-color:var(--ink);background:var(--ink);color:#fff}
+.role b{display:block;font-size:15.5px;font-weight:800;margin-bottom:3px}
+.role small{font-size:12.5px;color:var(--grey);display:block}
+.role.on small{color:#B8B8B8}
+.consent{display:flex;gap:11px;align-items:flex-start;margin-top:16px;font-size:13.5px;color:var(--grey2);max-width:52ch;text-align:left}
+.consent input{flex:0 0 auto;min-width:0;width:19px;height:19px;margin-top:2px;padding:0;accent-color:#0A0A0A;border-radius:5px}
+.consent a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+.final .consent{margin-left:auto;margin-right:auto}
+.final .roles{max-width:560px;margin-left:auto;margin-right:auto}
+.err{display:none;margin-top:12px;font-size:13.5px;color:#B3261E;font-weight:600}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="logo">KORA <span>SAFETY</span></div>
+    <a class="nav-cta" href="#waitlist">Early Access</a>
+  </header>
+
+  <div class="hero">
+    <div>
+      <span class="pill"><span class="dot"></span> Coming soon · Germany</span>
+      <h1>Security.<br><em>On demand.</em></h1>
+      <p class="lede">KORA verbindet Unternehmen mit geprüften Security-Dienstleistern. Anfrage stellen, passende Anbieter erhalten und Angebote einfach vergleichen.</p>
+      <div class="roles" role="group" aria-label="Ich bin">
+        <button type="button" class="role" data-role="auftraggeber"><b>Ich suche Security</b><small>Unternehmen, Veranstalter</small></button>
+        <button type="button" class="role" data-role="anbieter"><b>Ich biete Security</b><small>Sicherheitsdienstleister</small></button>
+      </div>
+      <form class="wl" novalidate>
+        <input type="email" placeholder="Geschäftliche E-Mail" required>
+        <button type="submit">Auf die Warteliste</button>
+      </form>
+      <label class="consent">
+        <input type="checkbox" class="ok-consent">
+        <span>Ich möchte per E-Mail informiert werden, wenn KORA startet. Widerruf jederzeit möglich. <a href="legal/datenschutz.html">Datenschutz</a></span>
+      </label>
+      <p class="err">Bitte Rolle wählen, E-Mail eintragen und Einwilligung bestätigen.</p>
+      <p class="fine">Kostenlos · Kein Spam · Early Access</p>
+      <div class="ok">✓ Du bist auf der Liste.</div>
+    </div>
+
+    <div class="mock">
+      <div class="win">
+        <div class="dots"><i></i><i></i><i></i></div>
+        <div class="top"><b>KORA</b><span class="tag">VERIFIED</span></div>
+        <div class="job">
+          <b>Security für Event · Berlin</b>
+          <small>12 Kräfte · 18:00–02:00 · Samstag</small>
+        </div>
+        <div class="two">
+          <div class="bid"><b>Alpha Security</b><div class="v">✓ Geprüfter Anbieter</div><div class="p">1.440 €</div></div>
+          <div class="bid"><b>Nord Guard</b><div class="v">✓ Geprüfter Anbieter</div><div class="p">1.560 €</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2>Eine Anfrage.<br><em>Mehrere passende Anbieter.</em></h2>
+    <p class="intro">Keine endlosen Telefonate. Keine unbekannten Anbieter. KORA bringt Nachfrage und geprüfte Security-Dienstleister an einem Ort zusammen.</p>
+    <div class="steps">
+      <div class="step"><div class="n">01 / ANFRAGE</div><h3>Bedarf eingeben.</h3><p>Ort, Zeitraum, Anzahl der Kräfte und Anforderungen – einmal eingeben.</p></div>
+      <div class="step"><div class="n">02 / MATCH</div><h3>Anbieter finden.</h3><p>KORA findet relevante und geprüfte Security-Dienstleister für deine Anfrage.</p></div>
+      <div class="step"><div class="n">03 / ANGEBOTE</div><h3>Angebote vergleichen.</h3><p>Mehrere Angebote erhalten und den passenden Anbieter auswählen.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Vertrauen ist die Basis.</h2>
+    <p class="intro">Security-Anbieter sollen nicht einfach nur gelistet werden. KORA schafft Transparenz über relevante Nachweise, Qualifikationen und Unternehmensinformationen.</p>
+    <div class="chips">
+      <span class="chip">✓ Unternehmensprüfung</span>
+      <span class="chip">✓ Nachweise</span>
+      <span class="chip">✓ Qualifikationen</span>
+      <span class="chip">✓ Versicherung</span>
+      <span class="chip">✓ Referenzen</span>
+      <span class="chip">✓ Bewertungen</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split">
+    <div>
+      <div class="eyebrow">Für Security-Anbieter</div>
+      <h2>Mehr Aufträge.<br><em>Weniger Verwaltung.</em></h2>
+      <p class="intro" style="margin-bottom:0">KORA bringt qualifizierte Anfragen direkt zu dir – und hilft dir, daraus Angebote und Einsätze schneller zu organisieren.</p>
+      <div class="list">
+        <div class="item"><span class="n">01</span><div><b>Neue Aufträge erhalten</b><p>Finde passende Anfragen in deiner Region und zu deinen Kapazitäten.</p></div></div>
+        <div class="item"><span class="n">02</span><div><b>Angebote schneller erstellen</b><p>Anfrage prüfen, Preis kalkulieren und Angebot digital abgeben.</p></div></div>
+        <div class="item"><span class="n">03</span><div><b>Mitarbeiter einfach einteilen</b><p>Verfügbarkeiten und Einsätze zentral organisieren – ohne Excel-Chaos.</p></div></div>
+      </div>
+      <a class="link" href="#waitlist">Als Anbieter Early Access sichern →</a>
+    </div>
+
+    <div class="mock">
+      <div class="win">
+        <div class="top"><b>KORA</b><span class="tag">ANBIETER</span></div>
+        <p class="fine" style="margin:0 0 14px">Deine nächsten Aufträge</p>
+        <div class="job"><b>Event Security · Stuttgart</b><small>8 Kräfte · Fr, 04.09. · 18:00–02:00 · <em>Neue Anfrage</em></small></div>
+        <div class="job"><b>Objektschutz · Ulm</b><small>4 Kräfte · Mo–Fr · ab 06:00 · <em>Angebot offen</em></small></div>
+        <p class="fine" style="margin:22px 0 0"><b style="color:var(--ink)">Mitarbeiterplanung</b> · Diese Woche</p>
+        <div class="week"><i>MO</i><i>DI</i><i>MI</i><i>DO</i><i>FR</i><i>SA</i></div>
+        <div class="shift"><span>Max · Event Security</span><b>18:00–02:00</b></div>
+        <div class="shift"><span>Leon · Objektschutz</span><b>06:00–14:00</b></div>
+        <div class="shift"><span>Tim · Event Security</span><b>18:00–02:00</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="waitlist" class="final">
+  <div class="wrap">
+    <h2>Sei dabei, bevor KORA live geht.</h2>
+    <p class="intro" style="margin:0 auto">Wir bauen KORA gerade mit Unternehmen aus der Praxis. Sichere dir Early Access.</p>
+    <div class="roles" role="group" aria-label="Ich bin">
+      <button type="button" class="role" data-role="auftraggeber"><b>Ich suche Security</b><small>Unternehmen, Veranstalter</small></button>
+      <button type="button" class="role" data-role="anbieter"><b>Ich biete Security</b><small>Sicherheitsdienstleister</small></button>
+    </div>
+    <form class="wl" novalidate>
+      <input type="email" placeholder="Geschäftliche E-Mail" required>
+      <button type="submit">Early Access sichern</button>
+    </form>
+    <label class="consent">
+      <input type="checkbox" class="ok-consent">
+      <span>Ich möchte per E-Mail informiert werden, wenn KORA startet. Widerruf jederzeit möglich. <a href="legal/datenschutz.html">Datenschutz</a></span>
+    </label>
+    <p class="err">Bitte Rolle wählen, E-Mail eintragen und Einwilligung bestätigen.</p>
+    <p class="fine">Kostenlos · Kein Spam · Early Access</p>
+    <div class="ok" style="max-width:420px;margin:18px auto 0">✓ Du bist auf der Liste.</div>
+  </div>
+</section>
+
+<div class="wrap">
+  <footer>
+    <span>© 2026 KORA Safety</span>
+    <span><a class="ig" href="https://www.instagram.com/kora.safety/" target="_blank" rel="noopener noreferrer" aria-label="KORA Safety auf Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg> Instagram</a> · <a href="legal/impressum.html">Impressum</a> · <a href="legal/datenschutz.html">Datenschutz</a></span>
+  </footer>
+</div>
+
+<script>
+/* Wartelisten-Endpunkt. In Produktion auf den echten Dienst zeigen lassen. */
+var WAITLIST_ENDPOINT = "";
+
+document.querySelectorAll('.roles').forEach(function(group){
+  group.addEventListener('click', function(e){
+    var b = e.target.closest('.role');
+    if(!b) return;
+    group.querySelectorAll('.role').forEach(function(x){ x.classList.remove('on'); });
+    b.classList.add('on');
+  });
+});
+
+document.querySelectorAll('form.wl').forEach(function(f){
+  var box     = f.parentElement;
+  var roles   = box.querySelector('.roles');
+  var consent = box.querySelector('.ok-consent');
+  var err     = box.querySelector('.err');
+
+  f.addEventListener('submit', function(e){
+    e.preventDefault();
+    var mail   = f.querySelector('input[type=email]');
+    var picked = roles.querySelector('.role.on');
+
+    if(!picked || !mail.value || mail.value.indexOf('@') < 1 || !consent.checked){
+      err.style.display = 'block';
+      if(!mail.value || mail.value.indexOf('@') < 1) mail.focus();
+      return;
+    }
+    err.style.display = 'none';
+
+    var payload = {
+      email: mail.value.trim(),
+      role: picked.dataset.role,
+      consent: true,
+      consentText: consent.parentElement.innerText.trim(),
+      ts: new Date().toISOString()
+    };
+
+    if(WAITLIST_ENDPOINT){
+      fetch(WAITLIST_ENDPOINT, {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(payload)
+      }).catch(function(){ /* stumm - der Nutzer sieht die Bestätigung trotzdem */ });
+    } else {
+      console.log('Warteliste (kein Endpunkt gesetzt):', payload);
+    }
+
+    f.style.display = 'none';
+    roles.style.display = 'none';
+    consent.parentElement.style.display = 'none';
+    box.querySelector('.ok').style.display = 'block';
+  });
+});
+</script>
+</body>
+</html>

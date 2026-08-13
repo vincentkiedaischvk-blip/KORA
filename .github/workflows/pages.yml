@@ -1,0 +1,51 @@
+name: Deploy to GitHub Pages
+
+# Das Repository ist eine statische Seite ohne Build. Der Workflow lädt sie
+# unverändert hoch — kein npm, keine Toolchain, nichts, was brechen kann.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sicherstellen, dass keine Lead-Rohdaten mitgehen
+        run: |
+          if git ls-files | grep -iE '(leads?).*\.(xlsx|csv)$'; then
+            echo "::error::Lead-Rohdaten im Repository. Siehe docs/DATA.md."
+            exit 1
+          fi
+          echo "Keine Lead-Rohdaten eingecheckt."
+
+      - name: Prüfen, dass keine Schriften von Dritten geladen werden
+        run: |
+          if grep -rEn '<link[^>]*fonts\.(googleapis|gstatic)' \
+               --include='*.html' --include='*.css' .; then
+            echo "::error::Externer Font-Request. Widerspricht Abschnitt 5 der Datenschutzerklärung."
+            exit 1
+          fi
+          echo "Schriften werden lokal eingebunden."
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deployment
+        uses: actions/deploy-pages@v4

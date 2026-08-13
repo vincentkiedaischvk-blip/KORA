@@ -1,0 +1,78 @@
+/* Lokal gehostet. Abschnitt 5 der Datenschutzerklärung sagt zu, dass keine
+   Verbindung zu Dritten aufgebaut wird — vorher lud diese Seite Archivo über
+   fonts.googleapis.com und widersprach damit ihrem eigenen Text. Jetzt Inter
+   aus brand/fonts/, dieselbe Schrift wie im übrigen Produkt. */
+@font-face{font-family:Inter;src:url(../../brand/fonts/Inter-Regular.ttf) format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:Inter;src:url(../../brand/fonts/Inter-SemiBold.ttf) format('truetype');font-weight:600;font-display:swap}
+@font-face{font-family:Inter;src:url(../../brand/fonts/InterDisplay-Bold.ttf) format('truetype');font-weight:700;font-display:swap}
+@font-face{font-family:Inter;src:url(../../brand/fonts/InterDisplay-ExtraBold.ttf) format('truetype');font-weight:800;font-display:swap}
+
+/* KORA Safety — Rechtsseiten */
+:root{
+  --nacht:#0D1219;
+  --tief:#151C26;
+  --kalk:#EDEBE5;
+  --grau:#7A8494;
+  --gold:#F2C14E;
+  --linie:rgba(237,235,229,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{
+  background:var(--nacht);color:var(--kalk);
+  font-family:Inter,"Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;line-height:1.65;
+}
+.wrap{max-width:760px;margin:0 auto;padding:36px 24px 96px}
+
+/* Kopf */
+.top{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-bottom:26px;border-bottom:1px solid var(--linie);flex-wrap:wrap}
+.logo{display:block;text-decoration:none;line-height:1}
+.logo .name{font-weight:800;font-size:22px;letter-spacing:.10em;color:var(--kalk);display:block}
+.logo .sub{font-weight:600;font-size:8px;letter-spacing:.52em;color:var(--grau);display:block;margin-top:6px;margin-left:.12em}
+.back{font-size:13px;color:var(--grau);text-decoration:none;font-weight:600}
+.back:hover{color:var(--kalk)}
+
+/* Titel */
+.eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--grau);font-weight:600;margin-top:44px}
+h1{font-size:clamp(28px,5vw,40px);font-weight:800;letter-spacing:-.02em;margin:12px 0 10px;line-height:1.1}
+.stand{font-size:13px;color:var(--grau)}
+
+/* Inhalt */
+section{margin-top:44px;border-top:1px solid var(--linie);padding-top:26px}
+h2{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--grau);margin-bottom:16px}
+h3{font-size:16px;font-weight:700;margin:26px 0 8px;letter-spacing:-.01em}
+h3:first-of-type{margin-top:0}
+p{font-size:15px;color:#C6C9CC;margin-bottom:14px}
+p:last-child{margin-bottom:0}
+a{color:var(--kalk);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(237,235,229,.35)}
+a:hover{text-decoration-color:var(--gold)}
+a:focus-visible,.back:focus-visible,.logo:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
+strong{color:var(--kalk);font-weight:700}
+ul{list-style:none;display:grid;gap:9px;margin:0 0 14px}
+li{font-size:15px;color:#C6C9CC;padding-left:17px;position:relative}
+li:before{content:"";position:absolute;left:0;top:11px;width:8px;height:2px;background:var(--grau)}
+.adresse{font-size:15px;color:#C6C9CC;line-height:1.9;margin-bottom:14px}
+
+/* Datenkarte */
+.karte{background:var(--tief);border-radius:8px;padding:20px 22px;margin:18px 0}
+.karte dl{display:grid;grid-template-columns:150px 1fr;gap:8px 18px;font-size:14px}
+.karte dt{color:var(--grau);font-weight:600}
+.karte dd{color:#C6C9CC}
+@media (max-width:520px){
+  .karte dl{grid-template-columns:1fr;gap:2px 0}
+  .karte dd{margin-bottom:10px}
+}
+
+/* Platzhalter — vor Livegang ersetzen */
+.ph{background:rgba(242,193,78,.14);color:var(--gold);padding:1px 6px;border-radius:3px;font-weight:600;white-space:nowrap}
+
+.hinweis{background:var(--tief);border-left:2px solid var(--gold);border-radius:0 8px 8px 0;padding:18px 22px;margin:24px 0}
+.hinweis p{font-size:14px;margin-bottom:8px}
+.hinweis p:last-child{margin-bottom:0}
+
+footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--linie);display:flex;gap:22px;flex-wrap:wrap;font-size:13px}
+footer a{color:var(--grau);text-decoration:none;font-weight:600}
+footer a:hover{color:var(--kalk)}
+footer .c{color:var(--grau);margin-left:auto}

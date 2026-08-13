@@ -1,0 +1,32 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Die Lead-Liste bleibt draussen. Sie enthält Firmennamen, Anschriften und
+# Direktnummern realer Unternehmen sowie eine interne Vertriebspriorität.
+# Begründung in docs/DATA.md. Aggregat statt Rohdaten: data/market.json.
+# ─────────────────────────────────────────────────────────────────────────────
+*Leads*.xlsx
+*leads*.xlsx
+*Leads*.csv
+*leads*.csv
+leads.py
+
+# Ebenfalls draussen: alles, was nach Kontaktdaten oder Zugangsdaten aussieht
+*kontakte*.xlsx
+*.env
+.env.*
+secrets.*
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# macOS und Editoren
+.DS_Store
+._*
+.idea/
+.vscode/
+*.swp
+
+# Excel-Sperrdateien
+~$*.xlsx

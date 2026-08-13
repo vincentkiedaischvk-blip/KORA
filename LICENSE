@@ -1,0 +1,59 @@
+KORA Safety — Lizenz
+
+Dieses Repository enthält Bestandteile mit unterschiedlichem Status.
+
+────────────────────────────────────────────────────────────────────────────
+1 · Quellcode — MIT
+────────────────────────────────────────────────────────────────────────────
+
+Betrifft die HTML-, CSS-, JavaScript- und Python-Dateien, insbesondere
+app/, scripts/, index.html und die Vorlagen unter landing/.
+
+MIT License
+
+Copyright (c) 2026 Vincent Kiedaisch
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+────────────────────────────────────────────────────────────────────────────
+2 · Marke und Gestaltung — alle Rechte vorbehalten
+────────────────────────────────────────────────────────────────────────────
+
+Nicht von der MIT-Lizenz erfasst sind der Name KORA und KORA Safety, die
+Wortmarke und die Logodateien unter brand/logo/ sowie die Bildmotive unter
+assets/. Sie dürfen nicht verwendet werden, um ein anderes Angebot zu
+kennzeichnen oder den Eindruck einer Verbindung zu KORA Safety zu erzeugen.
+
+Farbwerte, Schriftwahl und Gestaltungsregeln aus brand/styleguide.html sind
+davon nicht betroffen — Gestaltungsmittel sind frei.
+
+────────────────────────────────────────────────────────────────────────────
+3 · Schriften — SIL Open Font License 1.1
+────────────────────────────────────────────────────────────────────────────
+
+Die Schriftfamilie Inter unter brand/fonts/ und landing/fonts/ steht unter der
+SIL Open Font License, Version 1.1. Siehe LICENSE-FONTS.md.
+
+────────────────────────────────────────────────────────────────────────────
+4 · Rechtstexte — keine Rechtsberatung
+────────────────────────────────────────────────────────────────────────────
+
+Impressum und Datenschutzerklärung unter landing/legal/ sind unvollständige
+Vorlagen mit markierten Platzhaltern. Sie stellen keine Rechtsberatung dar.
+Wer sie übernimmt, prüft sie auf eigene Verantwortung. Siehe docs/LEGAL.md.
