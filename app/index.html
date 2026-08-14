@@ -99,6 +99,7 @@ input:focus,select:focus{border-color:var(--ink);outline:none}
 .guard:active{cursor:grabbing}
 .guard.drag{opacity:.35}
 .guard.busy{opacity:.4;cursor:not-allowed}
+.guard.todo{cursor:default;border-color:#F0D9A8;background:#FFFCF5}
 .guard.placed{display:none}
 .av{width:38px;height:38px;border-radius:999px;background:var(--lime);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex:0 0 auto}
 .av.grey{background:#E4E4E0;color:var(--grey2)}
@@ -122,6 +123,41 @@ input:focus,select:focus{border-color:var(--ink);outline:none}
 .calc .total span{font-size:15px;font-weight:700}
 .calc .total b{font-size:32px;font-weight:900;letter-spacing:-.02em}
 input[type=range]{width:100%;accent-color:var(--ink);padding:0;border:none}
+
+.calc .ln.sub2{padding:5px 0 5px 14px;font-size:13.5px;color:var(--grey)}
+.calc .ln.sub2 em{font-style:normal;font-size:11.5px;color:#A6A6A0}
+.calc .ln.zwischen{border-top:1px solid var(--line);margin-top:10px;padding-top:12px;font-weight:700;color:var(--ink)}
+.calc .zonen{display:inline-block;background:#EDEDE9;border-radius:999px;padding:7px 14px;font-size:12.5px;font-weight:700;color:var(--grey2);margin-bottom:16px}
+.calc .hint{margin-top:10px;font-size:12px;color:var(--grey);line-height:1.45;border-left:2px solid var(--lime);padding-left:10px}
+.calc .warn{margin-top:10px;font-size:13px;font-weight:700;color:#B23B2E}
+.modes{display:inline-flex;gap:4px;background:#EAEAE6;padding:4px;border-radius:999px;margin-bottom:18px}
+.modes button{padding:9px 20px;border-radius:999px;font-size:14px;font-weight:600;color:var(--grey2);transition:.18s}
+.modes button.on{background:var(--ink);color:#fff}
+.modes button:disabled{opacity:.45;cursor:not-allowed}
+.paus{display:flex;align-items:center;gap:10px}
+.paus input{max-width:210px;font-size:26px;font-weight:800;padding:12px 14px}
+.paus span{font-size:22px;font-weight:800;color:var(--grey2)}
+
+/* ── Nachweis / Bewacherregister ──────────────── */
+.guard{align-items:flex-start}
+.guard .av{margin-top:2px}
+.nwline{margin-top:3px;line-height:1.3}
+.nw{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700}
+.nw.ok{color:#3C7A26}.nw.bad{color:#B23B2E}.nw.wait{color:var(--grey2)}
+.nw svg{width:12px;height:12px}
+.gueltig{font-size:11.5px;color:var(--grey)}
+.upl{margin-top:7px;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;background:var(--ink);color:#fff;padding:6px 12px;border-radius:999px}
+.upl:hover{opacity:.85}
+.sperr{margin-top:5px;font-size:11.5px;font-weight:700;color:#B23B2E}
+
+/* ── Rechnung ─────────────────────────────────── */
+.inv{max-width:640px;background:var(--card);border-radius:var(--r);padding:30px;box-shadow:var(--shadow);margin-top:22px}
+.inv .head{display:flex;justify-content:space-between;gap:18px;border-bottom:2px solid var(--ink);padding-bottom:16px;margin-bottom:18px}
+.inv .no{font-size:11.5px;font-weight:700;color:var(--grey);letter-spacing:.08em;text-transform:uppercase}
+.inv .ln{display:flex;justify-content:space-between;gap:16px;padding:8px 0;font-size:14.5px;color:var(--grey2)}
+.inv .ln b{color:var(--ink)}
+.inv .sum{display:flex;justify-content:space-between;align-items:baseline;border-top:2px solid var(--ink);margin-top:12px;padding-top:14px}
+.inv .sum b{font-size:26px;font-weight:900}
 
 /* ── Zustände ─────────────────────────────────── */
 .empty{text-align:center;padding:70px 20px;color:var(--grey)}
@@ -189,18 +225,81 @@ input[type=range]{width:100%;accent-color:var(--ink);padding:0;border:none}
    Zustand
    ═══════════════════════════════════════════════════════ */
 const GUARDS = [
-  {id:1, name:"Max Berger",     qual:"Sachkunde § 34a",    rate:26, busy:false},
-  {id:2, name:"Leon Kaya",      qual:"Sachkunde § 34a",    rate:26, busy:false},
-  {id:3, name:"Tim Roth",       qual:"Unterrichtung",      rate:22, busy:false},
-  {id:4, name:"Sara Nowak",     qual:"Sachkunde § 34a",    rate:27, busy:false},
-  {id:5, name:"Jonas Weiß",     qual:"Unterrichtung",      rate:22, busy:false},
-  {id:6, name:"Elif Demir",     qual:"Meister f. Schutz",  rate:34, busy:false},
-  {id:7, name:"Paul Hartmann",  qual:"Unterrichtung",      rate:22, busy:false},
-  {id:8, name:"Nina Falk",      qual:"Sachkunde § 34a",    rate:26, busy:false},
-  {id:9, name:"Ali Yıldız",     qual:"Sachkunde § 34a",    rate:27, busy:false},
-  {id:10,name:"Marek Kowal",    qual:"Im Einsatz bis 22 h",rate:24, busy:true},
-  {id:11,name:"Jana Petrova",   qual:"Im Einsatz bis 02 h",rate:24, busy:true},
+  {id:1, name:"Max Berger",    stufe:"sach", bwid:"BW-7QK-4412", nachweis:"ok",         bis:"03/2029", busy:false},
+  {id:2, name:"Leon Kaya",     stufe:"sach", bwid:"BW-3RM-8801", nachweis:"ok",         bis:"11/2028", busy:false},
+  {id:3, name:"Tim Roth",      stufe:"ung",  bwid:"BW-9TF-1207", nachweis:"ok",         bis:"07/2030", busy:false},
+  {id:4, name:"Sara Nowak",    stufe:"sach", bwid:"BW-2LP-6634", nachweis:"ok",         bis:"01/2029", busy:false},
+  {id:5, name:"Jonas Weiss",   stufe:"ung",  bwid:"BW-5HD-3390", nachweis:"ok",         bis:"09/2027", busy:false},
+  {id:6, name:"Elif Demir",    stufe:"meis", bwid:"BW-8XN-5521", nachweis:"ok",         bis:"05/2031", busy:false},
+  {id:7, name:"Paul Hartmann", stufe:"ung",  bwid:"",            nachweis:"fehlt",      bis:"",        busy:false},
+  {id:8, name:"Nina Falk",     stufe:"sach", bwid:"BW-6WQ-2145", nachweis:"abgelaufen", bis:"04/2026", busy:false},
+  {id:9, name:"Ali Yildiz",    stufe:"sach", bwid:"BW-4JC-9078", nachweis:"ok",         bis:"12/2029", busy:false},
+  {id:10,name:"Marek Kowal",   stufe:"sach", bwid:"BW-1VB-7763", nachweis:"ok",         bis:"08/2028", busy:true},
+  {id:11,name:"Jana Petrova",  stufe:"ung",  bwid:"BW-0ZG-4419", nachweis:"ok",         bis:"02/2028", busy:true},
 ];
+
+/* ── Tarif, Zuschläge, Lohnnebenkosten ────────────────────────────────
+   Entgelt-TV Wach- und Sicherheitsgewerbe Berlin, Stand 01/2026.
+   Zuschlagssätze Berlin: Nacht 10 %, Sonntag und Feiertag je 20 %.
+   Zuschläge für tatsächlich geleistete Nacht- und Sonntagsarbeit sind
+   nach § 3b EStG steuer- UND beitragsfrei — auf ihnen liegen deshalb
+   keine Lohnnebenkosten. Genau diese Unterscheidung geht in jeder
+   handgeführten Kalkulation unter. */
+const TARIF = {
+  ung:  {lohn:15.15, label:"Unterrichtung § 34a"},
+  sach: {lohn:16.40, label:"Sachkunde § 34a"},
+  meis: {lohn:17.65, label:"Meister für Schutz und Sicherheit"}
+};
+const RANG      = {ung:1, sach:2, meis:3};
+const ZUSCHLAG  = {nacht:0.10, sonntag:0.20};
+const SV_AG     = 0.21;
+const GEMEIN    = 0.12;
+const NACHT_VON = 20, NACHT_BIS = 6;
+const NACHWEIS_TEXT = {fehlt:"Kein Nachweis hinterlegt", abgelaufen:"Nachweis abgelaufen"};
+
+/* Zerlegt den Einsatz stundenweise. Samstag 18–02 Uhr fällt in drei
+   Zonen: Regelzeit, Nacht ab 20 Uhr, ab Mitternacht zusätzlich Sonntag. */
+function stundenSplit(iso, von, bis){
+  const vh=parseInt(von), bh=parseInt(bis);
+  const n=(bh-vh+24)%24 || 8;
+  const start=new Date(iso+"T00:00:00");
+  const o={regel:0,nacht:0,sonn:0,nachtsonn:0,gesamt:n};
+  for(let i=0;i<n;i++){
+    const h=(vh+i)%24, tag=Math.floor((vh+i)/24);
+    const wd=new Date(start.getTime()+tag*86400000).getDay();
+    const nacht=h>=NACHT_VON||h<NACHT_BIS, sonn=wd===0;
+    if(nacht&&sonn) o.nachtsonn++; else if(nacht) o.nacht++;
+    else if(sonn) o.sonn++; else o.regel++;
+  }
+  return o;
+}
+
+function einsatzKosten(){
+  const r=S.request, sp=stundenSplit(r.iso,r.von,r.bis);
+  const k={grund:0,zNacht:0,zSonn:0,sv:0};
+  S.placed.forEach(id=>{
+    const lohn=TARIF[S.guards.find(g=>g.id===id).stufe].lohn;
+    k.grund  += lohn*sp.gesamt;
+    k.zNacht += lohn*(sp.nacht+sp.nachtsonn)*ZUSCHLAG.nacht;
+    k.zSonn  += lohn*(sp.sonn +sp.nachtsonn)*ZUSCHLAG.sonntag;
+    k.sv     += lohn*sp.gesamt*SV_AG;
+  });
+  k.personal   = k.grund+k.zNacht+k.zSonn+k.sv;
+  k.gemein     = k.personal*GEMEIN;
+  k.selbstkost = k.personal+k.gemein;
+  k.split      = sp;
+  return k;
+}
+
+/* Warum eine Kraft nicht in den Plan darf. Leerstring heißt: darf. */
+function sperrgrund(g){
+  if(g.busy)                    return "Bereits im Einsatz";
+  if(g.nachweis==="fehlt")      return "Kein Nachweis";
+  if(g.nachweis==="abgelaufen") return "Nachweis abgelaufen";
+  if(g.nachweis==="pruefung")   return "Prüfung läuft";
+  if(RANG[g.stufe] < RANG[S.request.minStufe]) return "Qualifikation zu niedrig";
+  return "";
+}
 
 /* Anbieter-Pool aus data/providers.js. Fehlt die Datei, läuft die Demo
    weiter — dann eben ohne Matching-Panel, statt mit einem leeren Bildschirm. */
@@ -217,6 +316,8 @@ const BLANK = {
   awarded:null,
   placed:[],              // Wach-IDs im Einsatzplan
   margin:28,
+  preisModus:"stunden",
+  pauschale:0,
   submitted:false,
   showRejects:false,      // Ausschlussliste aufgeklappt
   guards:JSON.parse(JSON.stringify(GUARDS))
@@ -258,6 +359,8 @@ function viewKunde(){
           <select id="f_anlass">
             <option>Event Security</option><option>Objektschutz</option>
             <option>Baustellenbewachung</option><option>Empfangsdienst</option>
+            <option>Firmenveranstaltung (gehoben)</option>
+            <option>Personenschutz / Fahrdienst</option>
           </select></div>
         <div class="field"><label>Ort</label>
           <select id="f_ort">${STAEDTE.map(s =>
@@ -401,11 +504,18 @@ function sendRequest(){
   const g = id => document.getElementById(id).value;
   const von = g('f_von'), bis = g('f_bis');
   let std = (parseInt(bis)-parseInt(von)+24)%24 || 8;
+  const anf = g('f_anf');
   S.request = {
-    anlass:g('f_anlass'), ort:g('f_ort'),
+    anlass:g('f_anlass'), ort:g('f_ort'), iso:g('f_datum'),
     datum:new Date(g('f_datum')).toLocaleDateString('de-DE',{weekday:'short',day:'2-digit',month:'2-digit',year:'numeric'}),
-    anzahl:parseInt(g('f_anzahl')), von, bis, anf:g('f_anf'), stunden:std
+    anzahl:parseInt(g('f_anzahl')), von, bis, anf, stunden:std,
+    minStufe: anf.startsWith('Unterrichtung') ? 'ung' : 'sach',
+    leitung:  anf.startsWith('Einsatzleitung')
   };
+  /* Fahrdienst und gehobene Firmenveranstaltungen werden nicht nach
+     Stunden abgerechnet, sondern pauschal. Vorschlag, kein Zwang. */
+  S.preisModus = /Firmenveranstaltung|Personenschutz/.test(S.request.anlass) ? "pauschal" : "stunden";
+  S.pauschale  = 0;
   // Zuordnung gegen den Pool. Läuft synchron, 121 Betriebe sind kein Problem.
   S.match = POOL.length ? KORAMatch.match(S.request, POOL) : null;
   S.step = 2;
@@ -435,14 +545,14 @@ function viewAnbieter(){
   const won = S.awarded && S.offers.find(o=>o.id===S.awarded)?.mine;
 
   let h = '';
-  if(won) h += `<div class="won-note appear">${TICK} Auftrag erhalten · ${r.anlass} · ${r.ort} · ${eur(myPrice())}</div>`;
+  if(won) return `<div class="won-note appear">${TICK} Auftrag erhalten · ${r.anlass} · ${r.ort} · ${eur(myPrice())}</div>` + rechnungBlock();
 
   h += `<span class="pill">${S.submitted?'Angebot abgegeben':'Neue Anfrage'}</span>
   <h1>${r.anlass} · ${r.ort}</h1>
   <p class="sub">${r.anzahl} Kräfte · ${r.datum} · ${r.von}–${r.bis} Uhr · ${r.stunden} Stunden · ${r.anf}</p>
   <div class="hr"></div>
-  <h2>Einsatz besetzen</h2>
-  <p class="muted" style="margin-bottom:22px">Ziehen Sie Mitarbeiter aus der Liste in den Einsatzplan. Der Preis berechnet sich automatisch.</p>
+  <h2>1 · Einsatz planen und einteilen</h2>
+  <p class="muted" style="margin-bottom:22px">Mitarbeiter in den Einsatzplan ziehen. Ohne gültigen Nachweis und passende Qualifikation nimmt der Plan niemanden an.</p>
 
   <div class="dnd">
     <div>
@@ -459,21 +569,87 @@ function viewAnbieter(){
         </div>
         <div class="slotgrid">${slotList()}</div>
       </div>
-      ${calcBlock()}
     </div>
-  </div>`;
+  </div>
+
+  <div class="hr"></div>
+  <h2>2 · Preis</h2>
+  <p class="muted" style="margin-bottom:18px">Nach Tarif kalkuliert oder als Pauschale. Die Kosten aus der Planung stehen in beiden Fällen darunter.</p>
+  <div class="modes">
+    <button class="${S.preisModus==='stunden'?'on':''}" ${S.submitted?'disabled':''} onclick="setModus('stunden')">Stundenkalkulation</button>
+    <button class="${S.preisModus==='pauschal'?'on':''}" ${S.submitted?'disabled':''} onclick="setModus('pauschal')">Pauschale</button>
+  </div>
+  ${calcBlock()}`;
   return h;
 }
 
+/* Der Auftrag endet nicht bei der Zusage. Stunden, Zuschläge und
+   Zuordnung liegen ohnehin im System — die Rechnung entsteht daraus,
+   nicht daneben. Das ist der Grund, warum ein Betrieb das Werkzeug auch
+   dann öffnet, wenn gerade keine Anfrage kommt. */
+function rechnungBlock(){
+  const r=S.request, k=einsatzKosten(), netto=myPrice(), ust=netto*0.19;
+  const e2=n=>new Intl.NumberFormat('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2}).format(n)+" €";
+  const nr="2026-"+String(1000+r.anzahl*7+k.split.gesamt).slice(-4);
+  const zuschlagStd=k.split.nacht+k.split.sonn+k.split.nachtsonn;
+  return `<span class="pill ink">Abrechnung</span>
+  <h1>Einsatz gelaufen.<br><em>Rechnung steht.</em></h1>
+  <p class="sub">Aus Einsatzplan und Zeitzonen erzeugt — keine zweite Erfassung.</p>
+  <div class="inv appear">
+    <div class="head">
+      <div><div class="no">Rechnung ${nr}</div>
+        <div style="font-size:19px;font-weight:800;margin-top:4px">${r.anlass} · ${r.ort}</div></div>
+      <div style="text-align:right"><div class="no">Leistungszeitraum</div>
+        <div style="font-weight:700;margin-top:4px">${r.datum}</div>
+        <div class="muted" style="font-size:13px">${r.von}–${r.bis} Uhr</div></div>
+    </div>
+    <div class="ln"><span>Sicherheitsdienstleistung · ${r.anzahl} Kräfte × ${k.split.gesamt} h</span><b class="mono">${e2(netto)}</b></div>
+    <div class="ln"><span>davon Nacht- und Sonntagsstunden</span><b class="mono">${zuschlagStd} h</b></div>
+    <div class="ln"><span>Nachweise der eingesetzten Kräfte</span><b>Im Auftrag hinterlegt</b></div>
+    <div class="ln"><span>Umsatzsteuer 19 %</span><b class="mono">${e2(ust)}</b></div>
+    <div class="sum"><span style="font-weight:700">Rechnungsbetrag</span><b class="mono">${e2(netto+ust)}</b></div>
+  </div>
+  <button class="btn ghost" style="margin-top:24px" onclick="resetAll()">Demo zurücksetzen</button>`;
+}
+
 function guardCard(g){
-  const placed = S.placed.includes(g.id);
-  const cls = `guard${g.busy?' busy':''}${placed?' placed':''}`;
-  return `<div class="${cls}" ${g.busy||S.submitted?'':'draggable="true"'}
+  const placed=S.placed.includes(g.id), grund=sperrgrund(g), t=TARIF[g.stufe];
+  const kannHochladen=(g.nachweis==="fehlt"||g.nachweis==="abgelaufen")&&!S.submitted;
+  const status =
+    g.nachweis==="ok"       ? `<span class="nw ok">${TICK} ${g.bwid}</span>`
+  : g.nachweis==="pruefung" ? `<span class="nw wait"><span class="dot"></span> Prüfung läuft</span>`
+  : `<span class="nw bad">${NACHWEIS_TEXT[g.nachweis]}</span>`;
+
+  const offen = g.nachweis==="fehlt"||g.nachweis==="abgelaufen"||g.nachweis==="pruefung";
+  return `<div class="guard${grund&&!offen?' busy':''}${offen?' todo':''}${placed?' placed':''}"
+      ${grund||S.submitted?'':'draggable="true"'}
       ondragstart="dragStart(event,${g.id})" ondragend="dragEnd(event)" data-id="${g.id}">
-    <div class="av ${g.busy?'grey':''}">${g.name.split(' ').map(n=>n[0]).join('')}</div>
-    <div class="info"><div class="nm">${g.name}</div><div class="ql">${g.qual}</div></div>
-    <div class="rt mono">${g.rate} €/h</div>
+    <div class="av ${grund?'grey':''}">${g.name.split(' ').map(n=>n[0]).join('')}</div>
+    <div class="info">
+      <div class="nm">${g.name}</div>
+      <div class="ql">${t.label} · ${t.lohn.toFixed(2).replace('.',',')} €/h Tarif</div>
+      <div class="nwline">${status}${g.bis?`<span class="gueltig"> · bis ${g.bis}</span>`:''}</div>
+      ${kannHochladen?`<button class="upl" onclick="upload(${g.id})">Nachweis hochladen</button>`:''}
+      ${grund&&g.nachweis==="ok"?`<div class="sperr">${grund}</div>`:''}
+    </div>
   </div>`;
+}
+
+/* Der Nachweis wird nicht geglaubt, sondern gegen das Bewacherregister
+   geprüft. Seit es 2022 beim Statistischen Bundesamt liegt, hat jede
+   Wachperson eine Bewacher-ID — damit wird aus einem Ordner voller PDFs
+   eine Abfrage. Hier simuliert; im Produkt die Eintrittshürde: ohne
+   gültige ID kommt niemand in den Einsatzplan. */
+function upload(id){
+  const g=S.guards.find(x=>x.id===id);
+  g.nachweis="pruefung"; render();
+  toast(`${g.name}: Abgleich mit dem Bewacherregister läuft`);
+  setTimeout(()=>{
+    g.nachweis="ok";
+    g.bwid=g.bwid||"BW-"+Math.random().toString(36).slice(2,5).toUpperCase()+"-"+Math.floor(1000+Math.random()*8999);
+    g.bis="06/2031"; render();
+    toast(`${g.name}: geprüft · ${g.bwid}`);
+  },1600);
 }
 
 function slotList(){
@@ -485,7 +661,7 @@ function slotList(){
       const g = S.guards.find(x=>x.id===gid);
       out += `<div class="slot filled">
         <div class="av" style="width:30px;height:30px;font-size:12px">${g.name.split(' ').map(n=>n[0]).join('')}</div>
-        <div><b style="font-size:14.5px">${g.name}</b><div class="ql" style="font-size:12px;color:var(--grey)">${g.qual}</div></div>
+        <div><b style="font-size:14.5px">${g.name}</b><div class="ql" style="font-size:12px;color:var(--grey)">${TARIF[g.stufe].label} · ${g.bwid}</div></div>
         ${S.submitted?'':`<button class="x" onclick="removeGuard(${g.id})" title="Entfernen">×</button>`}
       </div>`;
     } else {
@@ -496,32 +672,69 @@ function slotList(){
 }
 
 function myPrice(){
-  const r = S.request;
-  const cost = S.placed.reduce((s,id)=> s + S.guards.find(g=>g.id===id).rate * r.stunden, 0);
-  return Math.round(cost * (1 + S.margin/100));
+  const k=einsatzKosten();
+  if(S.preisModus==="pauschal") return S.pauschale || Math.round(k.selbstkost*1.35/50)*50;
+  return Math.round(k.selbstkost*(1+S.margin/100));
 }
 
+function setModus(m){
+  if(S.submitted) return;
+  if(m==="pauschal" && !S.pauschale) S.pauschale=Math.round(einsatzKosten().selbstkost*1.35/50)*50;
+  S.preisModus=m; render();
+}
+function setPauschale(v){ S.pauschale=Math.max(0,parseInt(v)||0); render(); }
+
 function calcBlock(){
-  const r = S.request;
-  const cost = S.placed.reduce((s,id)=> s + S.guards.find(g=>g.id===id).rate * r.stunden, 0);
-  const total = myPrice();
-  const full = S.placed.length === r.anzahl;
-  return `<div class="card calc" style="margin-top:18px">
-    <div class="ln"><span>Personalkosten (${S.placed.length} × ${r.stunden} h)</span><b class="mono">${eur(cost)}</b></div>
-    <div class="ln" style="display:block;padding-top:14px">
+  const r=S.request, k=einsatzKosten(), sp=k.split, total=myPrice();
+  const full=S.placed.length===r.anzahl;
+  const leitungFehlt=r.leitung && !S.placed.some(id=>S.guards.find(g=>g.id===id).stufe==='meis');
+  const e2=n=>new Intl.NumberFormat('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2}).format(n)+" €";
+  const db=total-k.selbstkost, effMarge=k.selbstkost?(db/k.selbstkost*100):0;
+
+  const zonen=[sp.regel?`${sp.regel} h Regelzeit`:'', sp.nacht?`${sp.nacht} h Nacht`:'',
+               sp.sonn?`${sp.sonn} h Sonntag`:'', sp.nachtsonn?`${sp.nachtsonn} h Nacht + Sonntag`:''
+              ].filter(Boolean).join(' · ');
+
+  /* Der Kostenteil gilt in beiden Modi — auch wer pauschal anbietet,
+     muss wissen, ob die Pauschale die Kosten trägt. */
+  const kosten=`
+    <div class="zonen">${zonen||'Einsatz noch nicht besetzt'}</div>
+    <div class="ln"><span>Tariflohn · ${S.placed.length} Kräfte × ${sp.gesamt} h</span><b class="mono">${e2(k.grund)}</b></div>
+    ${k.zNacht?`<div class="ln sub2"><span>Nachtzuschlag 10 %</span><b class="mono">${e2(k.zNacht)}</b></div>`:''}
+    ${k.zSonn ?`<div class="ln sub2"><span>Sonntagszuschlag 20 %</span><b class="mono">${e2(k.zSonn)}</b></div>`:''}
+    <div class="ln sub2"><span>Lohnnebenkosten 21 % <em>nur auf Grundlohn</em></span><b class="mono">${e2(k.sv)}</b></div>
+    <div class="ln sub2"><span>Gemeinkosten 12 %</span><b class="mono">${e2(k.gemein)}</b></div>
+    <div class="ln zwischen"><span>Selbstkosten</span><b class="mono">${e2(k.selbstkost)}</b></div>`;
+
+  const preisteil = S.preisModus==="pauschal" ? `
+    <div style="padding-top:18px">
+      <label>Pauschalpreis netto</label>
+      <div class="paus"><input type="number" step="50" min="0" value="${S.pauschale || total}"
+        ${S.submitted?'disabled':''} oninput="setPauschale(this.value)"><span>€</span></div>
+      <p class="muted" style="margin-top:9px">Üblich bei Fahrdienst, Personenschutz und gehobenen
+        Firmenveranstaltungen — dort zählt das Ergebnis, nicht die Stundenzahl.</p>
+    </div>` : `
+    <div style="padding-top:18px">
       <div class="row" style="justify-content:space-between;margin-bottom:8px">
-        <span>Aufschlag</span><b class="mono">${S.margin} %</b>
+        <span>Marge auf Selbstkosten</span><b class="mono">${S.margin} %</b>
       </div>
-      <input type="range" min="10" max="50" value="${S.margin}" ${S.submitted?'disabled':''}
+      <input type="range" min="5" max="45" value="${S.margin}" ${S.submitted?'disabled':''}
         oninput="S.margin=+this.value; render()">
-    </div>
+    </div>`;
+
+  return `<div class="card calc">${kosten}${preisteil}
     <div class="total"><span>Angebotssumme</span><b class="mono">${eur(total)}</b></div>
-    <p class="muted" style="margin-top:8px">zzgl. USt. · Deckungsbeitrag ${eur(total-cost)}</p>
+    <p class="muted" style="margin-top:8px">zzgl. USt. · Deckungsbeitrag ${e2(db)}${
+      S.preisModus==="pauschal"?` · entspricht ${effMarge.toFixed(0)} % Marge`:''} · ${
+      S.placed.length?e2(total/(S.placed.length*sp.gesamt)):'—'} je Kraft und Stunde</p>
+    ${db<0?`<p class="warn">Die Pauschale liegt unter den Selbstkosten.</p>`:''}
+    <p class="hint">Zuschläge nach § 3b EStG steuer- und beitragsfrei — deshalb liegen darauf keine Lohnnebenkosten.</p>
     <div style="margin-top:20px">
       ${S.submitted
         ? `<button class="btn ghost" disabled>Angebot abgegeben ${TICK}</button>`
-        : `<button class="btn" ${full?'':'disabled'} onclick="submitOffer()">Angebot abgeben ${arrow()}</button>
-           ${full?'':'<p class="muted" style="margin-top:12px">Erst alle Positionen besetzen.</p>'}`}
+        : `<button class="btn" ${full&&!leitungFehlt?'':'disabled'} onclick="submitOffer()">Angebot abgeben ${arrow()}</button>
+           ${!full?'<p class="muted" style="margin-top:12px">Erst alle Positionen besetzen.</p>'
+                 :(leitungFehlt?'<p class="muted" style="margin-top:12px">Einsatzleitung gefordert — mindestens eine Kraft mit Meisterqualifikation einplanen.</p>':'')}`}
     </div>
   </div>`;
 }
@@ -536,7 +749,9 @@ function drop(e){
   e.preventDefault(); e.currentTarget.classList.remove('over');
   if(dragId===null || S.submitted) return;
   const g = S.guards.find(x=>x.id===dragId);
-  if(g.busy || S.placed.includes(dragId) || S.placed.length >= S.request.anzahl){ dragId=null; return; }
+  const grund = sperrgrund(g);
+  if(grund){ toast(`${g.name}: ${grund}`); dragId=null; render(); return; }
+  if(S.placed.includes(dragId) || S.placed.length >= S.request.anzahl){ dragId=null; return; }
   S.placed.push(dragId); dragId=null; render();
 }
 function removeGuard(id){ S.placed = S.placed.filter(x=>x!==id); render(); }
